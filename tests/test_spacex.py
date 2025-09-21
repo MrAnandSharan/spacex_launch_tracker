@@ -59,7 +59,7 @@ async def test_fetch_and_filter_launches(mock_client):
     assert len(filtered) == 1
     assert filtered[0].name == "DemoSat"
 
-    # Filter by rocket name
+    # Filter by rocket
     filtered = await get_launches(mock_client, None, None, "Falcon 9", None, None)
     assert len(filtered) == 1
     assert filtered[0].rocket.name == "Falcon 9"

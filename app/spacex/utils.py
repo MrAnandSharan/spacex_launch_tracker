@@ -168,7 +168,7 @@ async def get_launch_site_rate(client: SpaceXClient) -> List[LaunchpadStats]:
 
 async def get_launch_frequency(client: SpaceXClient) -> FrequencyStats:
     try:
-        # Fetch responses from external APIs
+        # Fetch responses from external API
         logger.info(f"Calculation started for launch frequency by months and years.")
         launches: Dict[str, Any] = await client.get_launches()
 
@@ -182,7 +182,7 @@ async def get_launch_frequency(client: SpaceXClient) -> FrequencyStats:
             month = f"{dt.year}-{dt.month:02d}"
             by_month[month] = by_month.get(month, 0) + 1
         
-        # log and retunr response
+        # Log and retunr response
         logger.info(f"Calculated launch frequency: {len(by_year)} years, {len(by_month)} months")
         return FrequencyStats(by_year=by_year, by_month=by_month)
     except Exception as e:

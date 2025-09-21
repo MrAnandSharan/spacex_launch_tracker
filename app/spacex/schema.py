@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Dict, List, Optional
-from datetime import date, datetime
+from datetime import datetime
 
 class Rocket(BaseModel):
     id: str

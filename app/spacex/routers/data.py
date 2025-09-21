@@ -1,8 +1,5 @@
 from datetime import datetime
-import csv
-import io
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import StreamingResponse, JSONResponse, HTMLResponse
+from fastapi.responses import HTMLResponse
 from typing import Optional
 from fastapi import APIRouter, Depends, Request
 from fastapi.templating import Jinja2Templates
