@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpaceX Launches</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        h1 { margin-bottom: 1rem; }
+        table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f5f5f5; }
+        .pagination { margin-top: 1rem; }
+        .pagination a { margin-right: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>SpaceX Launches</h1>
+
+    <p>
+        <a href="/api/v1/statistics/dashboard">View Statistics Dashboard</a>
+    </p>
+
+    <p>
+        <a href="/api/v1/launch/export?format=csv" class="btn">Download CSV</a>
+        <a href="/api/v1/launch/export?format=json" class="btn">Download JSON</a>
+    </p>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Rocket</th>
+            <th>Launchpad</th>
+            <th>Success</th>
+        </tr>
+        {% for launch in launches_page.data %}
+        <tr>
+            <td>{{ launch.name }}</td>
+            <td>{{ launch.date_utc.strftime("%Y-%m-%d") if launch.date_utc else "N/A" }}</td>
+            <td>{{ launch.rocket.name }}</td>
+            <td>{{ launch.launchpad.name }}</td>
+            <td>{{ "Yes" if launch.success else "No" if launch.success is not none else "N/A" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        {% if launches_page.previous %}
+            <a href="{{ launches_page.previous }}">⬅ Previous</a>
+        {% endif %}
+        {% if launches_page.next %}
+            <a href="{{ launches_page.next }}">Next ➡</a>
+        {% endif %}
+    </div>
+
+    <p>Total launches: {{ launches_page.total }}</p>
+</body>
+</html>

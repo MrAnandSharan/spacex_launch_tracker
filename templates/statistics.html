@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpaceX Launch Stats</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        h2 { margin-top: 2rem; }
+        table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #ffffffff; }
+    </style>
+</head>
+<body>
+    <h1>SpaceX Launch Statistics</h1>
+
+    <p>
+        <a href="/api/v1/launch/dashboard">View Launch Dashboard</a>
+    </p>
+
+    <h2>Rocket Stats</h2>
+    <table>
+        <tr>
+            <th>Rocket</th>
+            <th>Total Launches</th>
+            <th>Success</th>
+            <th>Success Rate (%)</th>
+        </tr>
+        {% for stat in rocket_stats %}
+        <tr>
+            <td>{{ stat.rocket_name }}</td>
+            <td>{{ stat.total }}</td>
+            <td>{{ stat.success }}</td>
+            <td>{{ "%.2f"|format(stat.success_rate) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Launchpad Stats</h2>
+    <table>
+        <tr>
+            <th>Launchpad</th>
+            <th>Total Launches</th>
+        </tr>
+        {% for stat in launchpad_stats %}
+        <tr>
+            <td>{{ stat.launchpad_name }}</td>
+            <td>{{ stat.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Frequency Stats</h2>
+    <h3>By Month</h3>
+    <ul>
+        {% for month, count in frequency_stats.by_month.items() %}
+            <li>{{ month }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>By Year</h3>
+    <ul>
+        {% for year, count in frequency_stats.by_year.items() %}
+            <li>{{ year }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
